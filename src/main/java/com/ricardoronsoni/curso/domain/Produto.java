@@ -8,30 +8,37 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-
-//o Entity cria a tabela no banco
 @Entity
-public class Categoria implements Serializable{
+public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //a depender do DB é encessario mudar o IDENTITY
 	private Integer id;
 	private String nome;
+	private Double preco;
 	//como no modelo uma categoria pode ter varios produtos, entao é criada a lista abaixo
 	//categoria nao pode entrar no construtor
-	@ManyToMany(mappedBy = "categoria")  //é preciso informar em cima de qual atributo da outra classe que foi feito o mapeamento
-	private List<Produto> produtos = new ArrayList<>();
+	@ManyToMany //para associacoes N para N. precisa estar na outra classe
+	@JoinTable(  //define a tabela relacional. nao precisa estar na outra classe
+				name="PRODUTO_CATEGORIA", //define o nome da tabela relacional
+				joinColumns = @JoinColumn(name = "produto_id"),  //nome do campo que vai ser a chave estrangeira na tabela
+				inverseJoinColumns = @JoinColumn(name = "categoria_id")  //nome do campo que vai ser a chave estrangeira da outra tabela
+				)  
+	private List<Categoria> categoria = new ArrayList<>();
 	
-	public Categoria() {		
+	public Produto() {		
 	}
 
-	public Categoria(Integer id, String nome) {
+	public Produto(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.preco = preco;
 	}
 
 	public Integer getId() {
@@ -48,16 +55,23 @@ public class Categoria implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
-
-	public List<Produto> getProdutos() {
-		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public Double getPreco() {
+		return preco;
 	}
-	
+
+	public void setPreco(Double preco) {
+		this.preco = preco;
+	}
+
+	public List<Categoria> getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(List<Categoria> categoria) {
+		this.categoria = categoria;
+	}
 
 	@Override
 	public int hashCode() {
@@ -75,7 +89,7 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Produto other = (Produto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -83,6 +97,7 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
-
+	
+	
 	
 }
