@@ -2,9 +2,19 @@ package com.ricardoronsoni.curso.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+
+//o Entity cria a tabela no banco
+@Entity
 public class Categoria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) //a depender do DB é encessario mudar o IDENTITY
 	private Integer id;
 	private String nome;
 	
