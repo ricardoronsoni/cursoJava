@@ -13,6 +13,7 @@ import com.ricardoronsoni.curso.services.exceptions.ObjectNotFoundException;
 public class ResorceExcepcionHandler {
 	
 	//essa é a assinatura padrao do @ControllerAdvice
+	//nesse caso nao foi localizado o ID no banco e é pego o exception do .services
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
 		

@@ -8,31 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-
-//o Entity cria a tabela no banco
 @Entity
-public class Categoria implements Serializable{
+public class Estado implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //a depender do DB é encessario mudar o IDENTITY
 	private Integer id;
-	private String nome;
-	//como no modelo uma categoria pode ter varios produtos, entao é criada a lista abaixo
-	//categoria por ser colecao nao pode entrar no construtor
-	//@JsonManagedReference é pra quando ocorre associacao de classes. Para nao buscar os mesmos dados de categoria e produto ele so busca os resultados dessa classe. a outra classe associada usa o JsonBackReference para nao apresentar os seus dados
-	@JsonManagedReference
-	@ManyToMany(mappedBy = "categoria")  //é preciso informar em cima de qual atributo da outra classe que foi feito o mapeamento
-	private List<Produto> produtos = new ArrayList<>();
+	private String nome;	
+	@OneToMany(mappedBy = "estado")  //atributo da outra classe que ficou com o mapeamento
+	private List<Cidade> cidades = new ArrayList<>();
 	
-	public Categoria() {		
+	public Estado() {
 	}
 
-	public Categoria(Integer id, String nome) {
+	public Estado(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -52,16 +44,15 @@ public class Categoria implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}	
-
-	public List<Produto> getProdutos() {
-		return produtos;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public List<Cidade> getCidades() {
+		return cidades;
 	}
-	
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
 
 	@Override
 	public int hashCode() {
@@ -79,7 +70,7 @@ public class Categoria implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Estado other = (Estado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -87,6 +78,7 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
-
 	
+	
+
 }

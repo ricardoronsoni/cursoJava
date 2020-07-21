@@ -24,7 +24,7 @@ public class Produto implements Serializable{
 	private String nome;
 	private Double preco;
 	//como no modelo uma categoria pode ter varios produtos, entao é criada a lista abaixo
-	//categoria nao pode entrar no construtor
+	//categoria por ser colecao nao pode entrar no construtor
 	//@JsonBackReference é pra quando ocorre associacao de classes. Para nao buscar os mesmos dados de categoria e produto ele so busca os resultados da outra classe. a outra classe associada usa o @JsonManagedReference para apresentar os seus dados
 	@JsonBackReference 
 	@ManyToMany //para associacoes N para N. precisa estar na outra classe
