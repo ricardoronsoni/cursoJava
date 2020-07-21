@@ -30,6 +30,6 @@ public class CategoriaResource {
 
 		//o ResponseEntity retorna o valor no padrao rest...o ok é para dizer que tudo esta certo
 		return ResponseEntity.ok().body(obj);
-
+		//caso tenha uma excessao, o handler é que ira receptar isso e revolver para o cliente. Nao é bom usar o try/catch na camada de resorce
 	}
 }

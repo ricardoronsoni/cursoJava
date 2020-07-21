@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Produto implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -23,6 +25,8 @@ public class Produto implements Serializable{
 	private Double preco;
 	//como no modelo uma categoria pode ter varios produtos, entao é criada a lista abaixo
 	//categoria nao pode entrar no construtor
+	//@JsonBackReference é pra quando ocorre associacao de classes. Para nao buscar os mesmos dados de categoria e produto ele so busca os resultados da outra classe. a outra classe associada usa o @JsonManagedReference para apresentar os seus dados
+	@JsonBackReference 
 	@ManyToMany //para associacoes N para N. precisa estar na outra classe
 	@JoinTable(  //define a tabela relacional. nao precisa estar na outra classe
 				name="PRODUTO_CATEGORIA", //define o nome da tabela relacional

@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 //o Entity cria a tabela no banco
 @Entity
@@ -22,6 +24,8 @@ public class Categoria implements Serializable{
 	private String nome;
 	//como no modelo uma categoria pode ter varios produtos, entao é criada a lista abaixo
 	//categoria nao pode entrar no construtor
+	//@JsonManagedReference é pra quando ocorre associacao de classes. Para nao buscar os mesmos dados de categoria e produto ele so busca os resultados dessa classe. a outra classe associada usa o JsonBackReference para nao apresentar os seus dados
+	@JsonManagedReference
 	@ManyToMany(mappedBy = "categoria")  //é preciso informar em cima de qual atributo da outra classe que foi feito o mapeamento
 	private List<Produto> produtos = new ArrayList<>();
 	
