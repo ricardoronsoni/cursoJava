@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Estado implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -18,6 +20,7 @@ public class Estado implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //a depender do DB é encessario mudar o IDENTITY
 	private Integer id;
 	private String nome;	
+	@JsonBackReference //protege contra a serializacao
 	@OneToMany(mappedBy = "estado")  //atributo da outra classe que ficou com o mapeamento
 	private List<Cidade> cidades = new ArrayList<>();
 	

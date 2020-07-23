@@ -58,8 +58,7 @@ public class CursoApplication implements CommandLineRunner{
 		cat2.getProdutos().addAll(Arrays.asList(p2));		
 		p1.getCategoria().addAll(Arrays.asList(cat1));
 		p2.getCategoria().addAll(Arrays.asList(cat1, cat2));
-		p3.getCategoria().addAll(Arrays.asList(cat1));
-		
+		p3.getCategoria().addAll(Arrays.asList(cat1));		
 		
 		
 		Estado est1 = new Estado(null, "Minas Gerais");

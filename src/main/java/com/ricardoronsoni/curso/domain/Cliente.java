@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.ricardoronsoni.curso.domain.enums.TipoCliente;
 
 @Entity
@@ -27,6 +28,7 @@ public class Cliente implements Serializable{
 	private String email;
 	private String cpfOuCnpj;
 	private Integer tipo;
+	@JsonManagedReference  //proteger contra a serializacao
 	@OneToMany(mappedBy = "cliente")  //atributo da outra classe que ficou com o mapeamento
 	private List<Endereco> enderecos = new ArrayList<>();
 	//o set é diferente do list pq nao aceita repeticao de valores
